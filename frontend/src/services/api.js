@@ -1,7 +1,10 @@
 import axios from 'axios';
 
+// Si estás en desarrollo (localhost), usa el local. Si no, usa la URL de Render
 const API = axios.create({
-    baseURL: 'http://localhost:5000/api'
+    baseURL: process.env.NODE_ENV === 'production' 
+        ? 'https://tu-backend.render.com/api'  // <-- ESTO LO CAMBIAREMOS DESPUÉS
+        : 'http://localhost:5000/api'
 });
 
 API.interceptors.request.use((config) => {
